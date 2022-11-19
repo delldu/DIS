@@ -37,9 +37,9 @@ def get_tvm_model():
 
 def get_segment_model():
     """Create model."""
-    base = segment.ISNetDIS()
-    model = todos.model.ResizePadModel(base)
-    # model = todos.model.GridTileModel(base)
+    model = segment.ISNetDIS()
+    # model = todos.model.ResizePadModel(model)
+    # model = todos.model.GridTileModel(model)
     device = todos.model.get_device()
     model = model.to(device)
     model.eval()
@@ -70,7 +70,6 @@ def image_segment_predict(input_files, output_dir):
 
         # orig input
         input_tensor = todos.data.load_tensor(filename)
-
         # pytorch recommand clone.detach instead of torch.Tensor(input_tensor)
         orig_tensor = input_tensor.clone().detach()
         predict_tensor = todos.model.forward(model, device, input_tensor)

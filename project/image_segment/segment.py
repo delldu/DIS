@@ -369,9 +369,12 @@ class ISNetDIS(nn.Module):
         self.load_state_dict(torch.load(checkpoint))
 
     def forward(self, x):
+        B, C, H, W = x.size()
         hx = x
 
         hx = hx - 0.5  # for normalize, [0.5,0.5,0.5],[1.0,1.0,1.0]
+        hx = F.interpolate(hx, size=(1024, 1024), mode="bilinear", align_corners=False)
+
         hxin = self.conv_in(hx)
         # hx = self.pool_in(hxin)
 
@@ -439,5 +442,6 @@ class ISNetDIS(nn.Module):
         ma = torch.max(d)
         mi = torch.min(d)
         mask = (d - mi) / (ma - mi + 1e-8)
+        mask = F.interpolate(mask, size=(H, W), mode="bilinear", align_corners=False)
 
         return torch.cat((x, mask), dim=1)

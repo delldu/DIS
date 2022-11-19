@@ -56,7 +56,7 @@ def predict(input_files, output_dir):
         # orig input
         input_tensor = todos.data.load_tensor(filename)
         # pytorch recommand clone.detach instead of torch.Tensor(input_tensor)
-        orig_tensor = input_tensor.clone().detach()
+        # orig_tensor = input_tensor.clone().detach()
 
         B, C, H, W = input_tensor.shape
         input_tensor = todos.data.resize_tensor(input_tensor, SO_H, SO_W)
