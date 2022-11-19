@@ -76,8 +76,6 @@ class RSU7(nn.Module):
         self.rebnconv1d = REBNCONV(mid_ch * 2, out_ch, dirate=1)
 
     def forward(self, x):
-        b, c, h, w = x.shape
-
         hx = x
         hxin = self.rebnconvin(hx)
 
@@ -248,19 +246,14 @@ class RSU5(nn.Module):
 class RSU4(nn.Module):
     def __init__(self, in_ch=3, mid_ch=12, out_ch=3):
         super(RSU4, self).__init__()
-
         self.rebnconvin = REBNCONV(in_ch, out_ch, dirate=1)
 
         self.rebnconv1 = REBNCONV(out_ch, mid_ch, dirate=1)
         self.pool1 = nn.MaxPool2d(2, stride=2, ceil_mode=True)
-
         self.rebnconv2 = REBNCONV(mid_ch, mid_ch, dirate=1)
         self.pool2 = nn.MaxPool2d(2, stride=2, ceil_mode=True)
-
         self.rebnconv3 = REBNCONV(mid_ch, mid_ch, dirate=1)
-
         self.rebnconv4 = REBNCONV(mid_ch, mid_ch, dirate=2)
-
         self.rebnconv3d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
         self.rebnconv2d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
         self.rebnconv1d = REBNCONV(mid_ch * 2, out_ch, dirate=1)
@@ -309,7 +302,6 @@ class RSU4F(nn.Module):
         self.rebnconv1d = REBNCONV(mid_ch * 2, out_ch, dirate=1)
 
     def forward(self, x):
-
         hx = x
 
         hxin = self.rebnconvin(hx)

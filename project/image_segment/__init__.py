@@ -38,7 +38,6 @@ def get_tvm_model():
 def get_segment_model():
     """Create model."""
     base = segment.ISNetDIS()
-    base.load_weights(model_path="models/image_segment.pth")
     model = todos.model.ResizePadModel(base)
     # model = todos.model.GridTileModel(base)
     device = todos.model.get_device()
