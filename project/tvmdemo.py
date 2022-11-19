@@ -18,14 +18,10 @@ import torch
 import todos
 import image_segment
 
-# Save compiled model as output/image_segment.so
-#   Input shape: [1, 3, 1024, 2048]
-# Checking TVM model ...
-# TVM model OK.
+# Input shape: [1, 3, 1024, 1024]
 # Test performance ...
-#   Base:  {'mean': 64.75731918704696, 'median': 65.41643289965577, 'std': 1.454527019101529}
-#   TVM :  {'mean': 88.86324505088851, 'median': 92.38988549914211, 'std': 7.530230154728867}
-
+#   Base:  {'mean': 35.491605879506096, 'median': 35.493094951380044, 'std': 0.021703701093924613}
+#   TVM :  {'mean': 46.998761660652235, 'median': 48.91824670485221, 'std': 3.943442977615667}
 
 def compile():
     model, device = image_segment.get_tvm_model()

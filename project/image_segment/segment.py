@@ -333,7 +333,7 @@ class ISNetDIS(nn.Module):
         self.MAX_H = 1024
         self.MAX_W = 1024
         self.MAX_TIMES = 2
-        # GPU: 3G, 80ms
+        # GPU: 2G, 45ms
 
         self.conv_in = nn.Conv2d(in_ch, 64, 3, stride=2, padding=1)
         self.pool_in = nn.MaxPool2d(2, stride=2, ceil_mode=True)
@@ -377,10 +377,9 @@ class ISNetDIS(nn.Module):
         self.load_state_dict(torch.load(checkpoint))
 
     def forward(self, x):
-        # x = normalize(x,[0.5,0.5,0.5],[1.0,1.0,1.0])
         hx = x
 
-        hx = hx - 0.5  # for normalize
+        hx = hx - 0.5  # for normalize, [0.5,0.5,0.5],[1.0,1.0,1.0]
         hxin = self.conv_in(hx)
         # hx = self.pool_in(hxin)
 
