@@ -16,7 +16,7 @@ from tqdm import tqdm
 import torch
 
 import todos
-from . import segment
+from . import matte
 
 import pdb
 
@@ -26,7 +26,7 @@ def get_tvm_model():
     TVM model base on torch.jit.trace
     """
 
-    model = segment.ISNetDIS()
+    model = matte.ISNetDIS()
     device = todos.model.get_device()
     model = model.to(device)
     model.eval()
@@ -35,9 +35,9 @@ def get_tvm_model():
     return model, device
 
 
-def get_segment_model():
+def get_matte_model():
     """Create model."""
-    model = segment.ISNetDIS()
+    model = matte.ISNetDIS()
     # model = todos.model.ResizePadModel(model)
     # model = todos.model.GridTileModel(model)
     device = todos.model.get_device()
@@ -47,18 +47,18 @@ def get_segment_model():
     print(f"Running model on {device} ...")
     model = torch.jit.script(model)
     todos.data.mkdir("output")
-    if not os.path.exists("output/image_segment.torch"):
-        model.save("output/image_segment.torch")
+    if not os.path.exists("output/image_matte.torch"):
+        model.save("output/image_matte.torch")
 
     return model, device
 
 
-def image_segment_predict(input_files, output_dir):
+def image_matte_predict(input_files, output_dir):
     # Create directory to store result
     todos.data.mkdir(output_dir)
 
     # load model
-    model, device = get_segment_model()
+    model, device = get_matte_model()
 
     # load files
     image_filenames = todos.data.load_files(input_files)

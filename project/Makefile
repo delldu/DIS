@@ -13,7 +13,7 @@ install:
 	python setup.py install
 
 uninstall:
-	pip uninstall image_segment
+	pip uninstall image_matte
 
 clean:
-	rm -rf build dist image_segment.egg-info __pycache__
+	rm -rf build dist image_matte.egg-info __pycache__

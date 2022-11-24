@@ -16,7 +16,7 @@ from tqdm import tqdm
 
 import torch
 import todos
-import image_segment
+import image_matte
 
 # Input shape: [1, 3, 1024, 1024]
 # Test performance ...
@@ -24,25 +24,25 @@ import image_segment
 #   TVM :  {'mean': 46.998761660652235, 'median': 48.91824670485221, 'std': 3.943442977615667}
 
 def compile():
-    model, device = image_segment.get_tvm_model()
+    model, device = image_matte.get_tvm_model()
     SO_B, SO_C, SO_H, SO_W = 1, 3, model.MAX_H, model.MAX_W
 
     todos.data.mkdir("output")
-    if not os.path.exists("output/image_segment.so"):
+    if not os.path.exists("output/image_matte.so"):
         input = torch.randn(SO_B, SO_C, SO_H, SO_W)
-        todos.tvmod.compile(model, device, input, "output/image_segment.so")
+        todos.tvmod.compile(model, device, input, "output/image_matte.so")
     todos.model.reset_device()
 
 
 def predict(input_files, output_dir):
-    model, device = image_segment.get_tvm_model()
+    model, device = image_matte.get_tvm_model()
     SO_B, SO_C, SO_H, SO_W = 1, 3, model.MAX_H, model.MAX_W
 
     # Create directory to store result
     todos.data.mkdir(output_dir)
 
     # load model
-    tvm_model = todos.tvmod.load("output/image_segment.so", str(device))
+    tvm_model = todos.tvmod.load("output/image_matte.so", str(device))
 
     # load files
     image_filenames = todos.data.load_files(input_files)

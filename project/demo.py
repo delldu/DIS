@@ -9,6 +9,6 @@
 # ************************************************************************************/
 #
 
-import image_segment
+import image_matte
 
-image_segment.image_segment_predict("images/*.png", "output")
+image_matte.image_matte_predict("images/*.png", "output")

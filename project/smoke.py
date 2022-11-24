@@ -15,12 +15,12 @@ import time
 import random
 import torch
 
-import image_segment
+import image_matte
 
 from tqdm import tqdm
 
 if __name__ == "__main__":
-    model, device = image_segment.get_segment_model()
+    model, device = image_matte.get_matte_model()
 
     N = 100
     B, C, H, W = 1, 3, model.MAX_H, model.MAX_W  # model.max_h, model.max_w

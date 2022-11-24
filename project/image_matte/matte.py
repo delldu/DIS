@@ -363,7 +363,7 @@ class ISNetDIS(nn.Module):
 
         self.load_weights()
 
-    def load_weights(self, model_path="models/image_segment.pth"):
+    def load_weights(self, model_path="models/image_matte.pth"):
         cdir = os.path.dirname(__file__)
         checkpoint = model_path if cdir == "" else cdir + "/" + model_path
         self.load_state_dict(torch.load(checkpoint))

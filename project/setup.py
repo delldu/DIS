@@ -15,16 +15,16 @@ with open("README.md", "r") as file:
     long_description = file.read()
 
 setup(
-    name="image_segment",
+    name="image_matte",
     version="1.0.0",
     author="Dell Du",
     author_email="18588220928@163.com",
-    description="image/video segment package",
+    description="image matte package",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/delldu/DIS.git",
-    packages=["image_segment"],
-    package_data={"image_segment": ["models/image_segment.pth"]},
+    packages=["image_matte"],
+    package_data={"image_matte": ["models/image_matte.pth"]},
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
